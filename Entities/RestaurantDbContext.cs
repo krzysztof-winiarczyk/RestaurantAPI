@@ -9,17 +9,30 @@ namespace RestaurantAPI.Entities
     public class RestaurantDbContext : DbContext
     {
         private string _connectionString =
-            "Server=DESKTOP-P7U53VP;Database=RestaurantDb;Trusted_Connection=True;";
+            "Server=DESKTOP-IO0A0RD\\SQLEXPRESS;Database=RestaurantDb;Trusted_Connection=True;";
 
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Dish> Dishes { get; set; }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
+
         //to configure which entity has which property
         //we must override OnModelCreating method
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .Property(u => u.Email)
+                .IsRequired();
+
+            modelBuilder.Entity<Role>()
+                .Property(r => r.Name)
+                .IsRequired();
+
+
             modelBuilder.Entity<Restaurant>()       //determine entity
                 .Property(r => r.Name)              //determine property
                 .IsRequired()

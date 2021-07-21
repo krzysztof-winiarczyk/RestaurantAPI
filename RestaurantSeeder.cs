@@ -19,13 +19,41 @@ namespace RestaurantAPI
         {
             if (_dbContext.Database.CanConnect())   //can we connnect to db?
             {
+                if (!_dbContext.Roles.Any()) //is table "Roles" empty?
+                {
+                    var roles = GetRoles();
+                    _dbContext.Roles.AddRange(roles);
+                    _dbContext.SaveChanges();
+                }
+
                 if (!_dbContext.Restaurants.Any())   //is table "Restaurant" empty?
                 {
                     var restaurnats = GetRestaurants();
                     _dbContext.Restaurants.AddRange(restaurnats);
                     _dbContext.SaveChanges();
-                }
+                } 
             }
+        }
+
+        private IEnumerable<Role> GetRoles()
+        {
+            List<Role> roles = new List<Role>()
+            {
+                new Role()
+                {
+                    Name = "User"
+                },
+                new Role()
+                {
+                    Name = "Manager"
+                },
+                new Role()
+                {
+                    Name = "Admin"
+                }
+            };
+
+            return roles;
         }
 
         private IEnumerable<Restaurant> GetRestaurants()
@@ -95,5 +123,7 @@ namespace RestaurantAPI
 
             return restaurants;
         }
+
+      
     }
 }
