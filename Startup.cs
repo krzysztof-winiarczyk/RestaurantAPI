@@ -55,6 +55,12 @@ namespace RestaurantAPI
                 };
             });
 
+            //adding our own policy 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "Brithis", "Polish"));
+            });
+
             services.AddSingleton(authenticationSettings);
 
             services.AddTransient<IWeatherForecastService, WeatherForecastService>(); //registration of implementation of abstraction
