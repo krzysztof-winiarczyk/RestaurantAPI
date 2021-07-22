@@ -8,11 +8,11 @@ namespace RestaurantAPI.Entities
 {
     public class RestaurantDbContext : DbContext
     {
-        //private string _connectionString =
-        //    "Server=DESKTOP-IO0A0RD\\SQLEXPRESS;Database=RestaurantDb;Trusted_Connection=True;";
-
         private string _connectionString =
-            "Server=DESKTOP-P7U53VP;Database=RestaurantDb;Trusted_Connection=True;";
+            "Server=DESKTOP-IO0A0RD\\SQLEXPRESS;Database=RestaurantDb;Trusted_Connection=True;";
+
+        //private string _connectionString =
+        //    "Server=DESKTOP-P7U53VP;Database=RestaurantDb;Trusted_Connection=True;";
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Address> Addresses { get; set; }

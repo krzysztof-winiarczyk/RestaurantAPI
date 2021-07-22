@@ -20,6 +20,9 @@ using RestaurantAPI.Models.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FluentValidation.Validators;
+using RestaurantAPI.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestaurantAPI
 {
@@ -59,9 +62,11 @@ namespace RestaurantAPI
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "Brithis", "Polish"));
+                options.AddPolicy("Atleast20", builder => builder.AddRequirements(new MinimumAgeRequirement(20)));
             });
 
             services.AddSingleton(authenticationSettings);
+            services.AddScoped<IAuthorizationHandler, MinimumageRequirementHandler>();
 
             services.AddTransient<IWeatherForecastService, WeatherForecastService>(); //registration of implementation of abstraction
             services.AddControllers().AddFluentValidation();
