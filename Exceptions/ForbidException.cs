@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace RestaurantAPI.Exceptions
 {
-    public class ClaimMissingException : Exception
+    public class ForbidException : Exception
     {
-        public ClaimMissingException(string message) : base(message)
+        public ForbidException(string message) : base(message)
         {
 
         }

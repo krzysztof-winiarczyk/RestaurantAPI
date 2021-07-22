@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace RestaurantAPI.Controllers
 {
@@ -44,7 +45,9 @@ namespace RestaurantAPI.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            HttpContext.User.IsInRole("Admin");
+            //HttpContext.User.IsInRole("Admin");
+
+            var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
 
             var id = _restaurantService.Create(dto);
 

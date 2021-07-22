@@ -23,7 +23,7 @@ namespace RestaurantAPI.Authorization
         {
             if (context.User.FindFirst(c => c.Type == "DateOfBirth") is null)
             {
-                throw new ClaimMissingException("Unauthorized access");
+                throw new ForbidException("Unauthorized access");
             }
 
             var dateOfBirth = DateTime.Parse(context.User.FindFirst(c => c.Type == "DateOfBirth").Value);

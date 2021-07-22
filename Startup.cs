@@ -67,6 +67,7 @@ namespace RestaurantAPI
 
             services.AddSingleton(authenticationSettings);
             services.AddScoped<IAuthorizationHandler, MinimumageRequirementHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 
             services.AddTransient<IWeatherForecastService, WeatherForecastService>(); //registration of implementation of abstraction
             services.AddControllers().AddFluentValidation();
@@ -83,6 +84,8 @@ namespace RestaurantAPI
 
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<RequestTimeMiddleware>();
+            services.AddScoped<IUserContextService, UserContextService>();
+            services.AddHttpContextAccessor();
             services.AddSwaggerGen();
         }
 

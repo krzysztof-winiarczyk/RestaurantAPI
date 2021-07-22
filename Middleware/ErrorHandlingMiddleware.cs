@@ -23,7 +23,7 @@ namespace RestaurantAPI.Middleware
             {
                 await next.Invoke(context);
             }
-            catch (ClaimMissingException claimMissingException)
+            catch (ForbidException claimMissingException)
             {
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync(claimMissingException.Message);
